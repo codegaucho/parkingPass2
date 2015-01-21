@@ -15,9 +15,30 @@ Usage
 
 ----
 
-modify the Web.config and add in the connection string for your mongo db
-<add name="MongoServerSettings" connectionString="mongodb://user:password@server/database" />
-
+add Web.config in parkingPass2.Data along the lines of
+```sh
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  For more information on how to configure your ASP.NET application, please visit
+  http://go.microsoft.com/fwlink/?LinkId=301880
+  -->
+<configuration>
+  <appSettings>
+    <add key="webpages:Version" value="3.0.0.0" />
+    <add key="webpages:Enabled" value="false" />
+    <add key="ClientValidationEnabled" value="true" />
+    <add key="UnobtrusiveJavaScriptEnabled" value="true" />
+  </appSettings>
+  <system.web>
+    <compilation debug="true" targetFramework="4.5" />
+    <httpRuntime targetFramework="4.5" />
+  </system.web>
+<connectionStrings>
+    <!-- See http://www.mongodb.org/display/DOCS/CSharp+Driver+Tutorial#CSharpDriverTutorial-Connectionstrings for more info -->
+    <!-- this should be the connection string for your mongo database  -->
+    <add name="MongoServerSettings" connectionString="mongodb://localhost/MyDatabase" /> 
+</connectionStrings></configuration>
+```
 
 Version
 
