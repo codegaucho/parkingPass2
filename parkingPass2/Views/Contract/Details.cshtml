@@ -1,0 +1,38 @@
+﻿@model parkingPass2.Data.Contract
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Contract</h4>
+	<hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.DisplayName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DisplayName)
+        </dd>
+
+    </dl>
+
+    <h4>Contractors</h4>
+    <ul id="contract_contractors_list">
+    </ul>
+
+    @Html.ActionLink("Add", "Create", "Contractor", new { id = Model.Id }, null) 
+
+    <button type="button" class="btn btn-primary" onclick="location.href='@Url.Action("Create", "Contractor", new { id = Model.Id})'">
+        <span class="glyphicon glyphicon-user"></span> Add
+    </button>
+
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+

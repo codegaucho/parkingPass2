@@ -1,0 +1,200 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Parking Pass2</title>
+    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <!-- link href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/css/datepicker.min.css" rel="stylesheet" type="text/css" / -->
+    <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/dojo/1.10.0/dijit/themes/claro/claro.css" />
+
+    @RenderSection("head", required: false)
+
+    <!-- was script src="~/Scripts/modernizr-2.6.2.js -->
+</head>
+<body class="claro">
+    @RenderPage("~/Views/Shared/_navigator.cshtml")
+
+    @RenderSection("breadcrumbs", required: false)
+
+    <div class="container body-content">
+        <div id="flash-placeholder"></div>
+
+        @if (ViewBag.flash != null)
+        {
+                <!-- hide for now as we are adding flash via js - see scripts below -->
+                <div class="hide alert alert-dismissable alert-@ViewBag.flash.type">
+                    <button class="close" data-dismiss="alert" type="button">x</button>
+                    <h4>@ViewBag.flash.title</h4>
+                    <p>@ViewBag.flash.body</p>
+                </div>
+        }
+
+        <div class="row">
+            @RenderBody()
+        </div>
+
+        <div id="logwrap"></div>
+
+        <hr />
+
+        <footer id="page-footer" class="row">
+            <p id="page-footer-copy">&copy; @DateTime.Now.Year - U.S. Environmental Protection Agency, Region 2 </p>
+        </footer>
+
+    </div>
+
+    <!-- scripts at bottom  -->
+    <script type="text/javascript">
+        //dojoConfig must be in place before dojo is loaded
+        //use.js allows us to require non AMD packages as if they were AMD
+        //paths and use are for non-amd packages
+        //packages are for AMD packages
+        //aliases are for amd single files
+        //for applicationPath to work both local and on server, we need to make some adjustments
+
+        var appPath = "@Request.ApplicationPath";
+        if (appPath.slice(-1) != "/") {
+            appPath += "/";
+        }
+
+        //note the subtle difference between dojoConfi.app.path and dojoConfig.request.applicationPath
+        var dojoConfig = {
+            async: true,
+            parseOnLoad: false,
+            app: {
+                    userName: '@User.Identity.Name.Replace("AA\\", "")',
+                    path: appPath,
+                    flash: null
+                },
+                request: {
+                    applicationPath: "@Request.ApplicationPath",
+                    path: "@Request.Path",
+                    queryString: "@Request.QueryString"
+                },
+                packages: [
+                    //amd packages
+                    { name: "r2", location: "//x0202tnythnetdv.aa.ad.epa.gov/common/r2commonscripts" },
+                    { name: "parkingPass", location: appPath + "Scripts/app" },
+                    { name: "test", location: appPath + "Scripts/test" },
+                    //{ name: "lodash", location: "//x0202tnythnetdv.aa.ad.epa.gov/common/js/lodash-amd" },
+                    { name: "lodash", location: "//cdn.rawgit.com/lodash/lowdash-amd/2.4.1" },
+                    //{ name: "dgrid", location: "//x0202tnythnetdv.aa.ad.epa.gov/common/js/dgrid" },
+                    { name: "dgrid", location: "//cdn.rawgit.com/SitePen/dgrid/v0.3.16" },
+                    //{ name: "xstyle", location: "//x0202tnythnetdv.aa.ad.epa.gov/common/js/xstyle" },
+                    { name: "xstyle", location: "//cdn.rawgit.com/kriszyp/xstyle/v0.2.1" },
+                    //{ name: "put-selector", location: "//x0202tnythnetdv.aa.ad.epa.gov/common/js/put-selector" }
+                    { name: "put-selector", location: "//cdn.rawgit.com/kriszyp/put-selector/v0.3.6" }
+                ],
+                paths: {
+                    "use": "//cdnjs.cloudflare.com/ajax/libs/use.js/0.2.0/use.min",
+                    "text": "//cdnjs.cloudflare.com/ajax/libs/require-text/2.0.12/text.min",
+                    "typeahead": "//cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.10.4/typeahead.bundle.min",
+                    "signature_pad": "//cdnjs.cloudflare.com/ajax/libs/signature_pad/1.3.2/signature_pad.min",
+                    "tinymce": "//tinymce.cachefly.net/4.0/tinymce.min",
+                    //"bootstrap": "//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min",
+                    //"bootstrap-datepicker": "//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/js/bootstrap-datepicker.min",
+                    "hogan": "//cdnjs.cloudflare.com/ajax/libs/hogan.js/3.0.0/hogan.min.amd",
+                    //"jquery": "//code.jquery.com/jquery-1.11.1.min", 
+                    //"jquery-ui": "//code.jquery.com/ui/1.11.2/jquery-ui.min",
+                    "jquery-validate": "//ajax.aspnetcdn.com/ajax/jquery.validate/1.12.0/jquery.validate",
+                    "jquery-validate-unobtrusive": "//ajax.aspnetcdn.com/ajax/mvc/5.1/jquery.validate.unobtrusive.min"
+                },
+                aliases: [
+                    //["hogan", "//cdnjs.cloudflare.com/ajax/libs/hogan.js/3.0.0/hogan.min.amd.js"],
+                    //["jquery", "//code.jquery.com/jquery-1.11.1.min.js"], //should this be in paths?
+                    //["jquery-ui", "//code.jquery.com/ui/1.11.2/jquery-ui.min.js"], //should this be in paths?
+                    ["stacktrace", "//rawgithub.com/stacktracejs/stacktrace.js/master/stacktrace.js"]
+                ],
+                use: {
+                    "typeahead": { attach: "Typeahead" },
+                    "signature_pad": { attach: "SignaturePad" },
+                    "tinymce": { attach: "tinymce" },
+                    /*
+                    "bootstrap": {
+                        attach: "bootstrap",
+                        deps: ["jquery"]
+                    },
+                    "bootstrap-datepicker": {
+                        attach: "bootstrap-datepicker",
+                        deps: ["bootstrap"]
+                    },
+                    */
+                    "jquery-validate": {
+                        deps: ["jquery"],
+                        exports: "jquery.validation"
+                    },
+                    "jquery-validate-unobtrusive": {
+                        deps: ["jquery"]
+                    }
+                }
+            };
+    </script>
+
+    @if (ViewBag.flash != null)
+    {
+        <script>
+            //better way to get ViewBag.flash into a js object?
+            dojoConfig.app.flash = {
+                title: "@ViewBag.flash.title",
+                flashClass: "@ViewBag.flash.type",
+                body: "@ViewBag.flash.body"
+            };
+        </script>
+    }
+
+    <script src="//ajax.googleapis.com/ajax/libs/dojo/1.10.1/dojo/dojo.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <!-- should really include the datepicker only where needed -->
+    <!-- script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/js/bootstrap-datepicker.min.js" -->
+    
+    <script type="text/javascript">
+        //from lodash test2
+        function startsWith(string, target, position) {
+            string = string == null ? '' : String(string);
+            position = typeof position == 'undefined' ? 0 : nativeMin(position < 0 ? 0 : (+position || 0), string.length);
+            return string.lastIndexOf(target, position) == position;
+        }
+
+        //using html5 webstorage's sessionStorage Object to determine we need to show the warning banner
+        if (! sessionStorage.warningBanner) {
+            //we need to show the banner
+            //this should be written as a widget and only loaded when needed.
+            //alert("show banner");
+            //if they accept the warning, set sessionStorage.warningBanner to true so they don't see it again this session.
+            //sessionStorage.warningBanner = true;
+        }
+
+        //define a single global for the application
+        var app = {};
+        require(["parkingPass/applicationClass", "parkingPass/connectr2", "dojo/domReady!"], function (appController, ConnectR2) {
+            var viewBagIsAdmin = "@ViewBag.isAdmin";
+            var isAdmin = (viewBagIsAdmin == "True");
+
+            app = new appController(isAdmin);
+
+            app.username = dojoConfig.app.userName;
+
+            //if we have a flash waiting in ViewBag, go ahead and show it
+            //or are we doing this through the section above?
+            if (dojoConfig.app.hasOwnProperty('flash')) {
+                //app.createFlash(targetnode, dojoConfig.app.flash.type, dojoConfig.app.flash.title, dojoConfig.app.flash.body);
+                app.createFlash("flash-placeholder", dojoConfig.app.flash);
+            }
+
+            //now test the connectr2 stuff
+            var cr2 = new ConnectR2();
+            cr2.processSelector();
+
+
+        });
+        
+        
+        
+    </script>
+    @RenderSection("scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,117 @@
+﻿@model parkingPass2.Data.Ticket
+
+
+
+<div class="form-group">
+    @Html.LabelFor(model => model.Client.DisplayName, new { @class = "control-label col-md-3" })
+    <div class="col-md-9">
+        @Html.TextBoxFor(model => model.Client.DisplayName, new { @class = "form-control AD_read MUL_read PACS_edit", @readonly = "readonly" })
+
+        @Html.ValidationMessageFor(model => model.Client.DisplayName)
+    </div>
+</div>
+
+<div class="form-group">
+    @Html.LabelFor(model => model.Client.LanId, new { @class = "control-label col-md-3" })
+    <div class="col-md-9">
+        @Html.TextBoxFor(model => model.Client.LanId, new { @class = "form-control AD_read MUL_read PACS_edit", @readonly = "readonly" })
+    </div>
+</div>
+
+<div class="form-group">
+    @Html.LabelFor(model => model.Client.Office, new { @class = "control-label col-md-3" })
+    <div class="col-md-9">
+        <div>Where will the client be picking up the pass?</div>
+        @Html.DropDownListFor(model => model.Client.Office, new SelectList(
+                        new List<Object>{
+                            new { value = "" , text = ""  },
+                            new { value = "NY" , text = "NY"  },
+                            new { value = "NJ" , text = "NJ" }
+                        },
+                        "value",
+                        "text",
+                    1), new { @class = "form-control" })
+
+        @Html.ValidationMessageFor(model => model.Client.Office)
+
+    </div>
+</div>
+
+<div class="form-group">
+    @Html.LabelFor(model => model.Client.AmpBox, new { @class = "control-label col-md-3" })
+    <div class="col-md-9">
+        @Html.TextBoxFor(model => model.Client.AmpBox, new { @class = "form-control AD_read MUL_read PACS_edit", @readonly = "readonly" })
+    </div>
+</div>
+
+<div class="form-group">
+    @Html.LabelFor(model => model.Client.Supervisor, new { @class = "control-label col-md-3" })
+    <div class="col-md-9">
+        @Html.TextBoxFor(model => model.Client.Supervisor, new { @class = "form-control AD_read MUL_read PACS_edit", @readonly = "readonly" })
+    </div>
+</div>
+
+<div class="form-group">
+    @Html.LabelFor(model => model.Client.Organization, new { @class = "control-label col-md-3" })
+    <div class="col-md-9">
+        @Html.TextBoxFor(model => model.Client.Organization, new { @class = "form-control AD_read MUL_read PACS_edit", @readonly = "readonly" })
+    </div>
+</div>
+
+<div class="form-group">
+    @Html.LabelFor(model => model.Client.Company, new { @class = "control-label col-md-3" })
+    <div class="col-md-9">
+        @Html.TextBoxFor(model => model.Client.Company, new { @class = "form-control AD_read MUL_read PACS_edit", @readonly = "readonly" })
+    </div>
+</div>
+
+<div class="form-group">
+    @Html.LabelFor(model => model.Client.Phone, new { @class = "control-label col-md-3" })
+    <div class="col-md-9">
+        @Html.TextBoxFor(model => model.Client.Phone, new { @class = "form-control AD_read MUL_read PACS_edit", @type = "tel", @readonly = "readonly" })
+    </div>
+</div>
+
+<div class="form-group">
+    @Html.LabelFor(model => model.Client.Cell, new { @class = "control-label col-md-3" })
+    <div class="col-md-9">
+        @Html.TextBoxFor(model => model.Client.Cell, new { @class = "form-control", @type = "tel" })
+        @Html.ValidationMessageFor(model => model.Client.Cell)
+    </div>
+</div>
+
+<div class="form-group">
+    @Html.LabelFor(model => model.Client.Email, new { @class = "control-label col-md-3" })
+    <div class="col-md-9">
+        @Html.TextBoxFor(model => model.Client.Email, new { @class = "form-control AD_read MUL_read PACS_edit", @type = "email", @readonly = "readonly" })
+        @Html.ValidationMessageFor(model => model.Client.Email)
+    </div>
+</div>
+
+<div class="form-group">
+    @Html.LabelFor(model => model.Client.PersonnelType, new { @class = "control-label col-md-3" })
+    <div class="col-md-9">
+        <select id="Client_PersonnelType_Select" class="form-control AD_disabled MUL_disabled PACS_enabled" name="Client.PersonnelType" disabled="disabled">
+            <option value=""></option>
+            <!-- options added via javascript -->
+        </select>
+        @Html.TextBoxFor(model => model.Client.PersonnelType, new { @class = "form-control", @readonly = "readonly", @type="hidden" })
+        @Html.ValidationMessageFor(model => model.Client.PersonnelType)
+    </div>
+</div>
+
+<div class="form-group">
+    @Html.LabelFor(model => model.Client.ExpirationDate, new { @class = "control-label col-md-3" })
+    <div class="col-md-9">
+        @Html.TextBoxFor(model => model.Client.ExpirationDate, new { @class = "form-control", @type="datetime", @readonly="readonly" })
+        @Html.ValidationMessageFor(model => model.Client.ExpirationDate)
+    </div>
+</div>
+
+<div class="form-group">
+    @Html.LabelFor(model => model.Client.SystemOfRecord, new { @class = "control-label col-md-3" })
+    <div class="col-md-9">
+        @Html.TextBoxFor(model => model.Client.SystemOfRecord, new { @class = "form-control", @readonly = "readonly" })
+    </div>
+</div>
+

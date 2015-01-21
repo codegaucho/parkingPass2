@@ -1,0 +1,62 @@
+﻿<div class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            @Html.ActionLink("ParkingPass", "Index", "Home", new { }, new { @class = "navbar-brand" })
+            <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-main">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+        </div>
+        <div class="navbar-collapse collapse" id="navbar-main">
+            <ul class="nav navbar-nav" id="navlist">
+                <li class="dropdown hide" id="navlist_item_Admin">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="adminNav">Admin <span class="caret"></span></a>
+                    <ul class="dropdown-menu" aria-labelledby="adminNav">
+                        <li>@Html.ActionLink("Templates", "Index", "Template")</li>
+                        <li>@Html.ActionLink("Roles", "Index", "Role")</li>
+                        <li class="divider"></li>
+                        <li>@Html.ActionLink("Admin Add User", "AdminCreate", "Ticket")</li>
+                        <li class="divider"></li>
+                        <li>@Html.ActionLink("CSV", "AsCSV", "Ticket")</li>
+                    </ul>
+                </li>
+
+                <li class="dropdown hide" id="navlist_item_ParkingTags">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="tagNav">Parking Tags <span class="caret"></span></a>
+                    <ul class="dropdown-menu" aria-labelledby="tagNav">
+                        <li>
+                            @Html.ActionLink("All", "Index", "Ticket")
+                        </li>
+                        <li>
+                            @Html.ActionLink("NJ", "Index", "Ticket", new { id = "NJ" }, null)
+                        </li>
+                        <li>
+                            @Html.ActionLink("NY", "Index", "Ticket", new { id = "NY" }, null)
+                        </li>
+                    </ul>
+                </li>
+  
+                <li>
+                    @Html.ActionLink("My Pass", "MyTicket", "Ticket")
+                </li>
+            </ul>
+
+            <form id="nav-tag-finder" class="navbar-form navbar-left hide">
+                <input  type="text" placeholder="Find Tag" class="form-control tag-finder-typeahead col-lg-8">
+            </form>
+
+            <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="userNameNav">Hello, <span class="username">@User.Identity.Name</span>! <span class="caret"></span></a>
+                    <ul class="dropdown-menu" aria-labelledby="userNameNav">
+                        <li>@Html.ActionLink("About", "Display", "Template", new { id = "About" }, null)</li>
+                        <li>@Html.ActionLink("Contact", "Display", "Template", new { id = "Contact" }, null)</li>
+                        <li>@Html.ActionLink("Using", "Display", "Template", new { id = "Using" }, null)</li>
+                    </ul>
+                </li>
+            </ul>
+
+        </div>
+    </div>
+</div>

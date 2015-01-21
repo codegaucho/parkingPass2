@@ -1,0 +1,54 @@
+﻿<!-- Modal for adding SendTo to template -->
+<!-- use of this modal requires the id be passed as part of ViewBag -->
+
+<button class="btn btn-primary" data-toggle="modal" data-target="#addSendToModal">
+    <span class="glyphicon glyphicon-plus"></span>
+    Add SendTo...
+</button>
+
+<div class="modal fade" id="addSendToModal" tabindex="-1" role="dialog" aria-labelledby="addSendToModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="addSendToModalLabel">Add Plate</h4>
+            </div>
+            <form class="form-horizontal" action="~/Template/AddSendTo/@ViewBag.id" method="post">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label" for="Address">Email Address</label>
+                        <div class="col-lg-10">
+                            <input name="Address" id="Address" class="form-control" />
+                            <span class="field-validation-valid" data-valmsg-replace="true" data-valmsg-for="Address"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label" for="DisplayName">Display Name</label>
+                        <div class="col-lg-10">
+                            <input name="DisplayName" id="DisplayName" class="form-control" />
+                            <span class="field-validation-valid" data-valmsg-replace="true" data-valmsg-for="DisplayName"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="addSendToModalErrors"></div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                        <span class="glyphicon glyphicon-remove"></span>
+                        Cancel
+                    </button>
+
+                    <button type="submit" class="btn btn-primary">
+                        <span class="glyphicon glyphicon-plus"></span>
+                        Add to SendTo list
+                    </button>
+                </div>
+            </form>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->

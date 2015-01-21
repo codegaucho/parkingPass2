@@ -1,0 +1,73 @@
+﻿<!-- Modal for signing form -->
+<!-- use of this modal requires the id be passed as part of ViewBag -->
+
+<button class="btn btn-primary" data-toggle="modal" data-target="#signModal">
+    <span class="glyphicon glyphicon-pencil"></span>
+    Sign...
+</button>
+
+<div class="modal fade" id="signModal" tabindex="-1" role="dialog" aria-labelledby="signModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg"  >
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="signModalLabel">Sign</h4>
+            </div>
+            <form class="form-horizontal" id="_Sign-form" action="~/Ticket/Sign/@ViewBag.id" method="post">
+                <div class="modal-body">
+
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Disclaimer</h3>
+                        </div>
+                        <div class="panel-body" id="_Sign-disclaimer"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <div id="signature-pad" class="modal-signature-pad">
+                            <div class="modal-signature-pad--body">
+                                <canvas></canvas>
+                            </div>
+                            <div class="m-signature-pad--footer">
+                                <div class="description">Sign above</div>
+                                
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group hide">
+                        <label class="col-lg-2 control-label" for="Signature_Encoded">Base64</label>
+                        <div class="col-lg-10">
+                            <input name="Signature_Encoded" id="Signature_Encoded" class="form-control" />
+                            <span class="field-validation-valid" data-valmsg-replace="true" data-valmsg-for="Signature_Encoded"></span>
+                        </div>
+                    </div>
+
+                    <div id="signModalErrors"></div>
+                    <div id="_Sign-flash"></div>
+
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" id="_Sign_Modal_ClearButton">
+                        <span class="glyphicon glyphicon-step-backward"></span>
+                        Clear
+                    </button>
+
+                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                        <span class="glyphicon glyphicon-remove"></span>
+                        Cancel
+                    </button>
+
+                    <button type="submit" class="btn btn-primary">
+                        <span class="glyphicon glyphicon-ok"></span>
+                        Sign
+                    </button>
+                </div>
+            </form>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->

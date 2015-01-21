@@ -1,0 +1,54 @@
+﻿<!-- Modal for adding plate -->
+<!-- use of this modal requires the id be passed as part of ViewBag -->
+
+<button class="btn btn-primary" data-toggle="modal" data-target="#addPlateModal">
+    <span class="glyphicon glyphicon-plus"></span>
+    Add Vehicle...
+</button>
+
+<div class="modal fade" id="addPlateModal" tabindex="-1" role="dialog" aria-labelledby="addPlateModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="addPlateModalLabel">Add Plate</h4>
+            </div>
+            <form class="form-horizontal" action="~/Ticket/AddPlate/@ViewBag.id" method="post">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label" for="Plate">Plate #</label>
+                        <div class="col-lg-10">
+                            <input name="Plate" id="Plate" class="form-control" />
+                            <span class="field-validation-valid" data-valmsg-replace="true" data-valmsg-for="Plate"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label" for="State">State</label>
+                        <div class="col-lg-10">
+                            <input name="State" id="State" class="form-control state-typeahead" />
+                            <span class="field-validation-valid" data-valmsg-replace="true" data-valmsg-for="State"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="addPlateModalErrors"></div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                        <span class="glyphicon glyphicon-remove"></span>
+                        Cancel
+                    </button>
+
+                    <button type="submit" class="btn btn-primary">
+                        <span class="glyphicon glyphicon-plus"></span>
+                        Add Plate
+                    </button>
+                </div>
+            </form>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->

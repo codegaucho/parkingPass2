@@ -1,0 +1,77 @@
+﻿<!-- Modal for assigning Tag -->
+<!-- use of this modal requires the id be passed as part of ViewBag -->
+
+<button class="btn btn-primary" data-toggle="modal" data-target="#assignTagModal">
+    <span class="glyphicon glyphicon-tag"></span>
+    Assign...
+</button>
+
+<div class="modal fade" id="assignTagModal" tabindex="-1" role="dialog" aria-labelledby="assignTagModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="assignTagModalLabel">Sign</h4>
+            </div>
+            <form class="form-horizontal" id="_AssignTag-form" action="~/Ticket/IssueTag/@ViewBag.id" method="post">
+                <div class="modal-body">
+
+                    <div id="_AssignTag-flash"></div>
+
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label" for="Color">Color</label>
+                        <div class="col-lg-10">
+                            <select id="Color" name="Color" class="form-control">
+                                @if (@String.Compare(Model.Client.PersonnelType, "Employee") == 0) { 
+                                    <option>Blue</option>
+                                    <option selected>Green</option>
+                                } else { 
+                                    <option selected>Blue</option>
+                                    <option>Green</option>
+                                }
+                                
+                            </select>
+                            <span class="field-validation-valid" data-valmsg-replace="true" data-valmsg-for="Color"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label" for="Number">Number</label>
+                        <div class="col-lg-10">
+                            <input name="Number" id="Number" class="form-control med-input" />
+                            <span class="field-validation-valid" data-valmsg-replace="true" data-valmsg-for="Number"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label" for="Expires">Expires</label>
+                        <div class="col-lg-10">
+                            <!--input data-provide="datepicker" name="Expires" id="Expires" type="date" class="form-control med-input datepicker" -->
+                            <input name="Expires" id="Expires" type="date" class="form-control med-input" />
+                            <span class="field-validation-valid" data-valmsg-replace="true" data-valmsg-for="Expires"></span>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div id="assignTagModalErrors"></div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                        <span class="glyphicon glyphicon-remove"></span>
+                        Cancel
+                    </button>
+
+                    <button type="submit" class="btn btn-primary">
+                        <span class="glyphicon glyphicon-ok"></span>
+                        Assign Tag
+                    </button>
+                </div>
+            </form>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+

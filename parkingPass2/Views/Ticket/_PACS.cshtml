@@ -1,0 +1,57 @@
+﻿@model parkingPass2.Data.Ticket
+
+<div class="form-group">
+    @Html.LabelFor(model => model.Client.PACS.CardID, new { @class = "control-label col-md-2" })
+    <div class="col-md-10">
+        @Html.TextBoxFor(model => model.Client.PACS.CardID, new { @class = "form-control", @readonly = "readonly" })
+    </div>
+</div>
+
+<div class="form-group">
+    @Html.LabelFor(model => model.Client.PACS.CardInfoID, new { @class = "control-label col-md-2" })
+    <div class="col-md-10">
+        @Html.TextBoxFor(model => model.Client.PACS.CardInfoID, new { @class = "form-control", @readonly = "readonly" })
+    </div>
+</div>
+
+<div class="form-group">
+    @Html.LabelFor(model => model.Client.PACS.FirstName, new { @class = "control-label col-md-2" })
+    <div class="col-md-10">
+        @Html.TextBoxFor(model => model.Client.PACS.FirstName, new { @class = "form-control", @readonly = "readonly" })
+    </div>
+</div>
+
+<div class="form-group">
+    @Html.LabelFor(model => model.Client.PACS.LastName, new { @class = "control-label col-md-2" })
+    <div class="col-md-10">
+        @Html.TextBoxFor(model => model.Client.PACS.LastName, new { @class = "form-control", @readonly = "readonly" })
+    </div>
+</div>
+
+<div class="form-group">
+    @Html.LabelFor(model => model.Client.PACS.ActiveDateTime, new { @class = "control-label col-md-2" })
+    <div class="col-md-10">
+        @Html.TextBoxFor(model => model.Client.PACS.ActiveDateTime, new { @class = "form-control", @readonly = "readonly" })
+    </div>
+</div>
+
+<div class="form-group">
+    @Html.LabelFor(model => model.Client.PACS.InactiveDateTime, new { @class = "control-label col-md-2" })
+    <div class="col-md-10">
+        @Html.TextBoxFor(model => model.Client.PACS.InactiveDateTime, new { @class = "form-control", @readonly = "readonly" })
+    </div>
+</div>
+
+<div class="form-group">
+    @Html.LabelFor(model => model.Client.PACS.ExpirationDateTime, new { @class = "control-label col-md-2" })
+    <div class="col-md-10">
+        @Html.TextBoxFor(model => model.Client.PACS.ExpirationDateTime, new { @class = "form-control", @readonly = "readonly" })
+    </div>
+</div>
+
+<div class="form-group">
+    @Html.LabelFor(model => model.Client.PACS.DateTimeOfTxn, new { @class = "control-label col-md-2" })
+    <div class="col-md-10">
+        @Html.TextBoxFor(model => model.Client.PACS.DateTimeOfTxn, new { @class = "form-control", @readonly = "readonly" })
+    </div>
+</div>

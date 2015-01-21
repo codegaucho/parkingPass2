@@ -1,0 +1,206 @@
+﻿@model parkingPass2.Data.Ticket
+
+@{
+    ViewBag.Title = "SelfCreate";
+}
+
+<h2>Request Parking Pass</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    
+    <fieldset class="form-horizontal col-md-6">
+        <legend>Client Information</legend>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Client.DisplayName, new { @class = "control-label col-md-3" })
+            <div class="col-md-9">
+                @Html.TextBoxFor(model => model.Client.DisplayName, new { @class = "form-control", @readonly = "readonly" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Client.LanId, new { @class = "control-label col-md-3" })
+            <div class="col-md-9">
+                @Html.TextBoxFor(model => model.Client.LanId, new { @class = "form-control", @readonly = "readonly" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Client.Office, new { @class = "control-label col-md-3" })
+            <div class="col-md-9">
+                <div>Where will you be picking up your pass?</div>
+                @Html.DropDownListFor(model => model.Client.Office, new SelectList(
+                        new List<Object>{
+                            new { value = "" , text = ""  },
+                            new { value = "NY" , text = "NY"  },
+                            new { value = "NJ" , text = "NJ" }
+                        },
+                        "value",
+                        "text",
+                    1), new { @class = "form-control" })
+
+                @Html.ValidationMessageFor(model => model.Client.Office)
+
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Client.AmpBox, new { @class = "control-label col-md-3" })
+            <div class="col-md-9">
+                @Html.TextBoxFor(model => model.Client.AmpBox, new { @class = "form-control", @readonly = "readonly" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Client.Supervisor, new { @class = "control-label col-md-3" })
+            <div class="col-md-9">
+                @Html.TextBoxFor(model => model.Client.Supervisor, new { @class = "form-control", @readonly = "readonly" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Client.Organization, new { @class = "control-label col-md-3" })
+            <div class="col-md-9">
+                @Html.TextBoxFor(model => model.Client.Organization, new { @class = "form-control", @readonly = "readonly" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Client.Company, new { @class = "control-label col-md-3" })
+            <div class="col-md-9">
+                @Html.TextBoxFor(model => model.Client.Company, new { @class = "form-control", @readonly = "readonly" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Client.Phone, new { @class = "control-label col-md-3" })
+            <div class="col-md-9">
+                @Html.TextBoxFor(model => model.Client.Phone, new { @class = "form-control", @type = "tel", @readonly = "readonly" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Client.Cell, new { @class = "control-label col-md-3" })
+            <div class="col-md-9">
+                @Html.TextBoxFor(model => model.Client.Cell, new { @class = "form-control", @type = "tel" })
+                @Html.ValidationMessageFor(model => model.Client.Cell)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Client.Email, new { @class = "control-label col-md-3" })
+            <div class="col-md-9">
+                @Html.TextBoxFor(model => model.Client.Email, new { @class = "form-control", @type = "email", @readonly = "readonly" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Client.PersonnelType, new { @class = "control-label col-md-3" })
+            <div class="col-md-9">
+                @Html.TextBoxFor(model => model.Client.PersonnelType, new { @class = "form-control", @readonly = "readonly" })
+
+                <input id="Client_PersonnelType_Select" class="hide" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Client.ExpirationDate, new { @class = "control-label col-md-3" })
+            <div class="col-md-9">
+               @Html.TextBoxFor(model => model.Client.ExpirationDate, new { @class = "form-control", @type="datetime", @readonly="readonly" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Client.SystemOfRecord, new { @class = "control-label col-md-3" })
+            <div class="col-md-9">
+                @Html.TextBoxFor(model => model.Client.SystemOfRecord, new { @class = "form-control", @readonly = "readonly" })
+            </div>
+        </div>
+    </fieldset>
+    
+    <fieldset class="form-horizontal col-md-6 hide">
+        <legend>AD Info:</legend>
+
+        @if (1 == 1)
+        {
+            Html.RenderPartial("~/Views/Ticket/_AD.cshtml");
+        }
+    </fieldset>
+    
+    <fieldset class="form-horizontal col-md-6">
+        <legend>Vehicle Information</legend>
+        <p>Enter the plate number and state of your primary vehicle - you will be afforded the ability to add additional vehicles in the next step.</p>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Vehicles[0].Plate, new { @class = "control-label col-md-2" })
+            <div class="col-lg-10">
+                @Html.TextBoxFor(model => model.Vehicles[0].Plate, new { @class = "form-control med-input" })
+                @Html.ValidationMessageFor(model => model.Vehicles[0].Plate)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Vehicles[0].State, new { @class = "control-label col-md-2" })
+            <div class="col-lg-10">
+                @Html.TextBoxFor(model => model.Vehicles[0].State, new { @class = "form-control med-input state-typeahead" })
+                @Html.ValidationMessageFor(model => model.Vehicles[0].State)
+            </div>
+        </div>
+    </fieldset>
+    
+    <fieldset class="form-horizontal col-md-6">
+        <legend>Confirmation</legend>
+
+        <div class="panel panel-warning">
+            <div class="panel-heading">
+                <h3 class="panel-title">Notice!</h3>
+            </div>
+            <div class="panel-body">
+                <p id="disclaimer">
+                    <!-- Disclaimer goes here - using ajax to fetch from template-->
+                </p>
+            </div>
+            <div class="panel-footer">
+                @Html.ActionLink("Cancel", "Index", "Home", new { }, new { @class = "btn btn-default btn-sm" })
+                <button type="submit" class="btn btn-primary btn-sm">
+                    <span class="glyphicon glyphicon-ok"></span>
+                    Submit
+                </button>
+            </div>
+        </div>
+
+    </fieldset> 
+    
+}
+
+<div class="hide">
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Breadcrumbs {
+    <ul class="breadcrumb">
+        <li>
+            @Html.ActionLink("Home", "Index", "Home")
+        </li>
+        <li>
+            @Html.ActionLink("Tickets", "Index", "Ticket")
+        </li>
+        <li class="active">New Ticket</li>
+    </ul>
+}
+
+@section Scripts {
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+    <script type="text/javascript">
+        require(["parkingPass/ticketClass", "dojo/domReady!"], function (TicketClass) {
+
+            var ticket = new TicketClass();
+            ticket.selfCreate("@ViewBag.lanid");
+        });
+    </script>
+}

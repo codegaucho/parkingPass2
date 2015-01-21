@@ -1,0 +1,45 @@
+﻿<!-- Modal for deleting Tag -->
+<!-- use of this modal requires the id be passed as part of ViewBag -->
+
+<button class="btn btn-danger" data-toggle="modal" data-target="#deleteTagModal">
+    <span class="glyphicon glyphicon-remove"></span>
+    Revoke...
+</button>
+
+<div class="modal fade" id="deleteTagModal" tabindex="-1" role="dialog" aria-labelledby="deleteTagModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="deleteTagModalLabel">Sign</h4>
+            </div>
+            <form class="form-horizontal" id="_DeleteTag-form" action="~/Ticket/DeleteTag/@ViewBag.id" method="post">
+                <div class="modal-body">
+
+                    <div id="_DeleteTag-flash"></div>
+
+                    <strong>Are you sure you want to delete the tag from this ticket?</strong>
+
+
+                </div>
+
+                <div id="deleteTagModalErrors"></div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                        <span class="glyphicon glyphicon-remove"></span>
+                        No, leave tag as it is
+                    </button>
+
+                    <button type="submit" class="btn btn-primary">
+                        <span class="glyphicon glyphicon-ok"></span>
+                        Yes, Delete Tag
+                    </button>
+                </div>
+            </form>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->

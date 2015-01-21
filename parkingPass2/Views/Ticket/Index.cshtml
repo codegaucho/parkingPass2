@@ -1,0 +1,73 @@
+﻿@model IEnumerable<parkingPass2.Data.Ticket>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Client.DisplayName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Updated)
+        </th>
+        <th>
+            Plates
+        </th>
+        <th>
+            Tag
+        </th>
+        <th>
+            Tag Type
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Status)
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @if (item.Client != null) 
+            { 
+                @Html.ActionLink(item.Client.DisplayName, "Details", new {  id = item.Id  })
+            } 
+            else 
+            {
+                @Html.ActionLink("No Client", "Details", new {  id = item.Id  })
+            }
+            
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Updated)
+        </td>
+        <td>
+            <ul>
+                @foreach (var v in item.Vehicles) 
+                {
+                    <li>
+                        @Html.DisplayFor(modelItem => v.Plate) (@Html.DisplayFor(modelItem => v.State))
+                    </li> 
+                }
+            </ul
+        </td>
+
+        <td>
+            @Html.DisplayFor(modelItem => item.Tag.Number) 
+        </td>
+
+        <td>
+            @Html.DisplayFor(modelItem => item.Tag.Color)
+        </td>
+
+        <td>
+            @Html.DisplayFor(modelItem => item.Status)
+        </td>
+
+    </tr>
+}
+
+</table>

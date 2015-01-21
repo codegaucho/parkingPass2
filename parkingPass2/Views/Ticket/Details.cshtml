@@ -1,0 +1,334 @@
+﻿@model parkingPass2.Data.Ticket
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Parking Tag Request</h2>
+<div class="row">
+
+    <fieldset class="form-horizontal col-md-6">
+        <legend>Ticket</legend>
+  
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.UpdatedBy)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.UpdatedBy) 
+                <button type="button" class="btn btn-default btn-xs" data-userinfo-dialog="bootstrapModal" data-userinfo-linkdisplay="clickable" data-userinfo-identifier="@Html.DisplayFor(model => model.UpdatedBy)">
+                    <span class="glyphicon glyphicon-user"></span>
+                </button>
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Updated)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Updated)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Status)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Status)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.RequestType)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.RequestType)
+            </dd>
+
+        </dl>
+    </fieldset>
+
+    <fieldset class="form-horizontal col-md-6">
+        <legend>Client</legend>
+
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Client.LanId)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Client.LanId)
+                <button type="button" class="btn btn-default btn-xs" data-userinfo-dialog="bootstrapModal" data-userinfo-linkdisplay="clickable" data-userinfo-identifier="@Html.DisplayFor(model => model.Client.LanId)">
+                    <span class="glyphicon glyphicon-user"></span>
+                </button>
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Client.DisplayName)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Client.DisplayName)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Client.Email)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Client.Email)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Client.PersonnelType)
+            </dt>
+
+            <dd id="Client_PersonnelType">
+                @Html.DisplayFor(model => model.Client.PersonnelType)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Client.Company)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Client.Company)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Client.Office)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Client.Office)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Client.Organization)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Client.Organization)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Client.Phone)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Client.Phone)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Client.Cell)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Client.Cell)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Client.ExpirationDate)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Client.ExpirationDate)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Client.SystemOfRecord)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Client.SystemOfRecord)
+            </dd>
+
+        </dl>
+    </fieldset>
+
+    <fieldset class="form-horizontal col-md-6">
+        <legend>Vehicles</legend>
+
+        <ul>
+            @foreach (var vehicle in Model.Vehicles)
+            { 
+                <li>
+                    @vehicle.State
+                    <span>-</span>
+                    @vehicle.Plate
+                </li>
+            }
+
+        </ul>
+
+        <div class="form-group">
+        @if (ViewBag.isAdmin || ViewBag.isMyTicket)
+        {
+            //show if admin OR if this is the persons ticket
+            Html.RenderPartial("~/Views/Ticket/_AddPlate.cshtml");
+            
+            bool hideRemove = (Model.Vehicles == null || ! Model.Vehicles.Any());
+            
+            if (! hideRemove)
+            {
+                Html.RenderPartial("~/Views/Ticket/_RemovePlate.cshtml");
+            }
+        } 
+        </div>
+
+        
+    </fieldset>
+
+    <fieldset class="form-horizontal col-md-6">
+        <legend>Tag Info</legend>
+
+        @if (Model.Tag != null)
+        { 
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.Tag.Color)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Tag.Color)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Tag.Number)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Tag.Number)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Tag.Issued)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Tag.Issued)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Tag.IssuedBy)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Tag.IssuedBy)
+                    <button type="button" class="btn btn-default btn-xs" data-userinfo-dialog="bootstrapModal" data-userinfo-linkdisplay="clickable" data-userinfo-identifier="@Html.DisplayFor(model => model.Tag.IssuedBy)">
+                        <span class="glyphicon glyphicon-user"></span>
+                    </button>
+                </dd>
+
+                @if (Model.Tag.DistributedBy != null)
+                { 
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Tag.Distributed)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Tag.Distributed)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Tag.DistributedBy)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Tag.DistributedBy)
+                    </dd>
+                }
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Tag.Expires)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Tag.Expires)
+                </dd>
+            </dl>
+        }
+
+        @if (ViewBag.isAdmin)
+        {
+            Html.RenderPartial("~/Views/Ticket/_AssignTag.cshtml");
+            
+            if (Model.Tag != null) 
+            {
+                Html.RenderPartial("~/Views/Ticket/_DeleteTag.cshtml");
+            }
+            
+        }
+    </fieldset>
+
+
+    @if (Model.RequestType != "Self")
+    {
+        <fieldset class="form-horizontal col-md-6">
+            <legend>Signature</legend>
+
+            @if (Model.Signature != null)
+            {
+                <div class="form-group">
+                    <img src="@Html.DisplayFor(model => model.Signature.Signature_Encoded)" />
+                </div>
+            }
+            @if (1 == 1)
+            {
+                Html.RenderPartial("~/Views/Ticket/_Sign_Modal.cshtml");
+            }
+            
+            
+        </fieldset>
+    }
+    
+    @if (ViewBag.isAdmin)
+    {
+        <fieldset class="form-horizontal col-md-12">
+            <legend>Administration</legend>
+            @if (1 == 1)
+            {
+                Html.RenderPartial("~/Views/Shared/_Delete.cshtml");
+                Html.RenderPartial("~/Views/Shared/_LogHistory.cshtml");
+            }
+        </fieldset>
+    }
+
+</div>
+
+@section Breadcrumbs {
+    <ul class="breadcrumb">
+        <li>
+            @Html.ActionLink("Home", "Index", "Home")
+        </li>
+        <li>
+            @Html.ActionLink("Tickets", "Index", "Ticket")
+        </li>
+        <li class="active">
+            @Html.DisplayFor(model => model.Client.DisplayName)
+        </li>
+    </ul>
+}
+
+@section Scripts {
+
+    <script src="//ajax.aspnetcdn.com/ajax/jquery.validate/1.12.0/jquery.validate.js"></script>
+    <script src="//ajax.aspnetcdn.com/ajax/mvc/5.1/jquery.validate.unobtrusive.min.js"></script>
+    <!--  shouldn't date picker be here?-->
+
+    <script type="text/javascript">
+        require(["parkingPass/ticketClass", "dojo/domReady!"], function (TicketClass) {
+            var viewBagIsAdmin = "@ViewBag.isAdmin";
+            var isAdmin = (viewBagIsAdmin == "True");
+            var ticket = new TicketClass();
+            ticket.details(isAdmin, "signature-pad", "@ViewBag.id");
+
+            //if assign is null, set defaults for Color and Expires based on client info
+            if (isAdmin) {
+                //$('#Expires').datepicker('setDate', new Date(2016, 2, 5));
+            }
+            
+        });
+    </script>
+}

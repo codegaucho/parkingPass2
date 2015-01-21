@@ -1,0 +1,41 @@
+<!-- user info template.  From file Content/userinfo/html -->
+<!-- 10/21/2014 - file created - Tom Murphy -->
+<div>
+	<img class="userInfoPhoto" src="https://x0202tnythnetpd.aa.ad.epa.gov/adservice/api/users/ADImage/{{lanId}}" alt="{{firstName}} {{lastName}}">
+
+	<dl class="dl-horizontal">
+		<dt>Lan ID</dt>
+		<dd>{{lanId}}</dd>
+
+		<dt>ename</dt>
+		<dd>{{firstName}} {{lastName}}</dd>
+
+		<dt>EPA Name</dt>
+		<dd>{{cn}}</dd>
+
+		<dt>EMail</dt>
+		<dd>
+			<a href="mailto:{{email}}" target="_blank">{{email}}</a>
+		</dd>
+
+		<dt>Employee ID</dt>
+		<dd>{{workForceID}}</dd>
+
+		<dt>Organization</dt>
+		<dd>{{organization}}</dd>
+
+		<dt>Phone</dt>
+		<dd>{{phone}}</dd>
+
+		<dt>ampBox</dt>
+		<dd>{{ampBox}}&nbsp;</dd>
+
+		<dt>Supervisor</dt>
+		<dd>
+            {{manager.firstName}} {{manager.lastName}}
+            <button type="button" class="btn btn-default btn-xs" data-userinfo-dialog="bootstrapModal" data-userinfo-linkdisplay="clickable" data-userinfo-identifier="{{manager.upn}}">
+                <span class="glyphicon glyphicon-user"></span>
+            </button>
+        </dd>
+	</dl>
+</div>

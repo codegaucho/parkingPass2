@@ -1,0 +1,167 @@
+﻿@model parkingPass2.Data.Ticket
+
+@{
+    ViewBag.Title = "View1";
+}
+
+<h2>Admin Create</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    
+    <div class="col-md-6">
+    <fieldset class="form-horizontal">
+        <legend>User Name and Source</legend>
+
+        <h4>Select client from one of the systems</h4>
+
+        <div class="form-group hide">
+            <label class="control-label col-md-4">
+                Acitve Directory
+            </label>
+            <div class="col-md-8">
+                <span id="Client_AD">
+                    <img src="http://forum.xda-developers.com/clientscript/loading_small.gif" /> 
+                    Loading Active Directory data
+                </span>
+            </div>
+        </div>
+
+        <div class="form-group hide">
+            <label class="control-label col-md-4">
+                Master User List
+            </label>
+            <div class="col-md-8">
+                <span id="Client_MUL">
+                    <img src="http://forum.xda-developers.com/clientscript/loading_small.gif" /> 
+                    Loading Master User List data
+                </span>
+            </div>
+        </div>
+
+        <div class="form-group hide">
+            <label class="control-label col-md-4">
+                PACS
+            </label>
+            <div class="col-md-8">
+                <span id="Client_PACS">
+                    <img src="http://forum.xda-developers.com/clientscript/loading_small.gif" /> 
+                    Loading PACS data
+                </span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            Active Directory, Master User List, and PACS
+            <div id="multiple-datasets2">
+                <input class="typeahead" type="text" id="testMultiTypeahead" placeholder="Select User">
+            </div>
+
+        </div>
+
+    </fieldset>
+    
+    <fieldset class="form-horizontal">
+        <legend>Vehicle Information</legend>
+
+        <p>Enter the plate number and state of your primary vehicle - you will be afforded the ability to add additional vehicles in the next step.</p>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Vehicles[0].Plate, new { @class = "control-label col-md-2" })
+            <div class="col-lg-10">
+                @Html.TextBoxFor(model => model.Vehicles[0].Plate, new { @class = "form-control med-input" })
+                @Html.ValidationMessageFor(model => model.Vehicles[0].Plate)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Vehicles[0].State, new { @class = "control-label col-md-2" })
+            <div class="col-lg-10">
+                @Html.TextBoxFor(model => model.Vehicles[0].State, new { @class = "form-control med-input state-typeahead" })
+                @Html.ValidationMessageFor(model => model.Vehicles[0].State)
+            </div>
+        </div>
+    </fieldset>
+    </div>
+    
+     
+    <fieldset class="form-horizontal col-md-6">
+        <legend>Client Information</legend>
+
+        @if (1 == 1)
+        {
+            Html.RenderPartial("~/Views/Ticket/_Client.cshtml");
+        }
+    </fieldset>
+    
+    
+    
+    <fieldset class="form-horizontal col-md-6 hide">
+        <legend>AD Info:</legend>
+            @if (1 == 1)
+            {
+                Html.RenderPartial("~/Views/Ticket/_AD.cshtml");
+            }
+    </fieldset>
+    
+    <fieldset class="form-horizontal col-md-6 hide">
+        <legend>PACS Info:</legend>
+        @if (1 == 1)
+        {
+            Html.RenderPartial("~/Views/Ticket/_PACS.cshtml");
+        }
+    </fieldset>
+    
+    <fieldset class="form-horizontal col-md-6 hide">
+        <legend>MUL Info:</legend>
+
+        @if (1 == 1)
+        {
+            Html.RenderPartial("~/Views/Ticket/_MUL.cshtml");
+        }
+    </fieldset>
+    
+    <div class="form-group col-md-6">
+        @Html.ActionLink("Cancel", "Index", "Home", new { }, new { @class = "btn btn-default btn-sm" })
+        <button type="submit" class="btn btn-primary btn-sm">
+            <span class="glyphicon glyphicon-ok"></span>
+             Submit
+        </button>
+    </div>
+    
+    
+}
+
+<div class="hide">
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Breadcrumbs {
+    <ul class="breadcrumb">
+        <li>
+            @Html.ActionLink("Home", "Index", "Home")
+        </li>
+        <li>
+            @Html.ActionLink("Tickets", "Index", "Ticket")
+        </li>
+        <li class="active">New Ticket (Admin)</li>
+    </ul>
+}
+
+@section Scripts {
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+    <!-- for testing typeahead - we could also do this with require
+    <script src="//cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.10.4/typeahead.bundle.min.js"></script>
+         -->
+    <script type="text/javascript">
+        require(["parkingPass/ticketClass", "dojo/domReady!"], function (TicketClass) {
+            app.ticket = new TicketClass();
+            app.ticket.adminCreate();
+        });
+    </script>
+}
